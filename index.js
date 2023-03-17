@@ -1,14 +1,18 @@
-const express = require('express')
-const app = express()
+const app = require("./app")
+
 const port = 3000
+const dbURL = 'mongodb+srv://admin:xeoGbG65sGQtpDMZ@cluster0.m236azf.mongodb.net/?retryWrites=true&w=majority'
 
-app.get('/', (req, res) => {
-    res.send({
-    msg:`Bienvenido a mi servidor express`,
-    ok: true
-})
-})
+const mongoose = require('mongoose')
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+mongoose.connect(dbURL).then(()=>{
+    console.log('Coneccion correcta a')
+    app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`)
+    })
+
 })
+    .catch((error)=> {
+        console.log(error)
+    })
+
